@@ -219,6 +219,9 @@ class Config
         if (empty($typo3Config)) {
             return $rootPackageExtraConfig;
         }
+        if (getenv('TYPO3_PATH_ROOT') !== false) {
+            $rootPackageExtraConfig['typo3/cms']['web-dir'] = getenv('TYPO3_PATH_ROOT');
+        }
         $fileSystem = new Filesystem();
         $config = new static('/fake/root');
         $config->merge($rootPackageExtraConfig);
